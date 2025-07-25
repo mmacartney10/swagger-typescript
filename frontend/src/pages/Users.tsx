@@ -5,11 +5,13 @@ interface User {
   id: number;
   name: string;
   email: string;
-  username: string;
+  age: number;
+  city: string;
+  occupation: string;
 }
 
 const fetchUsers = async (): Promise<User[]> => {
-  const response = await fetch("https://jsonplaceholder.typicode.com/users");
+  const response = await fetch("/api/people");
   if (!response.ok) {
     throw new Error("Failed to fetch users");
   }
@@ -50,7 +52,10 @@ const Users: React.FC = () => {
   return (
     <div>
       <h1>Users</h1>
-      <p>This page demonstrates React Query for data fetching and caching.</p>
+      <p>
+        This page demonstrates React Query for data fetching from our backend
+        API (/api/people).
+      </p>
 
       <div style={{ marginTop: "2rem" }}>
         <h2>User List:</h2>
@@ -73,10 +78,16 @@ const Users: React.FC = () => {
             >
               <h3>{user.name}</h3>
               <p>
-                <strong>Username:</strong> {user.username}
+                <strong>Age:</strong> {user.age}
               </p>
               <p>
                 <strong>Email:</strong> {user.email}
+              </p>
+              <p>
+                <strong>City:</strong> {user.city}
+              </p>
+              <p>
+                <strong>Occupation:</strong> {user.occupation}
               </p>
             </div>
           ))}

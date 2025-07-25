@@ -1,0 +1,35 @@
+{
+  "name": "insert-name-here",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "build:frontend": "cd ../frontend && npm run build",
+    "build:all": "npm run build:frontend && npm run build",
+    "start": "node dist/index.js",
+    "start:production": "npm run build:all && npm start",
+    "dev": "tsc && node dist/index.js",
+    "dev:watch": "tsc --watch",
+    "dev:ts": "ts-node src/index.ts",
+    "serve:frontend": "npm run build:frontend && npm run dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "polka": "^0.5.2",
+    "serve-static": "^2.2.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-dist": "^5.27.0",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/serve-static": "^1.15.0",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.8",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  }
+}
