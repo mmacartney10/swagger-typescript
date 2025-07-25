@@ -1,0 +1,19 @@
+{
+  "name": "swagger-typescript",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "build": "npm run generate-types && npm run generate-client",
+    "generate-types": "openapi-typescript ./api-docs.json -o ./generated/api-types.ts",
+    "generate-client": "node index.js",
+    "test": "node -e \"import('./test-api-client.js').then(m => m.testApiClient())\""
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "openapi-typescript": "^7.8.0",
+    "swagger-typescript-api": "^12.0.4"
+  }
+}

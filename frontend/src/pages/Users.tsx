@@ -1,0 +1,89 @@
+import React from "react";
+import { useQuery } from "@tanstack/react-query";
+
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  username: string;
+}
+
+const fetchUsers = async (): Promise<User[]> => {
+  const response = await fetch("https://jsonplaceholder.typicode.com/users");
+  if (!response.ok) {
+    throw new Error("Failed to fetch users");
+  }
+  return response.json();
+};
+
+const Users: React.FC = () => {
+  const {
+    data: users,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["users"],
+    queryFn: fetchUsers,
+  });
+
+  if (isLoading) {
+    return (
+      <div>
+        <h1>Users</h1>
+        <p>Loading users...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div>
+        <h1>Users</h1>
+        <p style={{ color: "red" }}>
+          Error loading users:{" "}
+          {error instanceof Error ? error.message : "Unknown error"}
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      <h1>Users</h1>
+      <p>This page demonstrates React Query for data fetching and caching.</p>
+
+      <div style={{ marginTop: "2rem" }}>
+        <h2>User List:</h2>
+        <div
+          style={{
+            display: "grid",
+            gap: "1rem",
+            gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+          }}
+        >
+          {users?.map((user) => (
+            <div
+              key={user.id}
+              style={{
+                border: "1px solid #ddd",
+                borderRadius: "8px",
+                padding: "1rem",
+                backgroundColor: "#f9f9f9",
+              }}
+            >
+              <h3>{user.name}</h3>
+              <p>
+                <strong>Username:</strong> {user.username}
+              </p>
+              <p>
+                <strong>Email:</strong> {user.email}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Users;
