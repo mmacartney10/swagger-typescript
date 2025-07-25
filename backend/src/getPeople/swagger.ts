@@ -2,7 +2,7 @@ import swaggerJSDoc from "swagger-jsdoc";
 
 // OpenAPI 3.0 Path specification for the /people endpoint
 export const getPeopleEndpoint: swaggerJSDoc.Paths = {
-  "/people": {
+  "/api/people": {
     get: {
       summary: "Get all people",
       description: "Retrieve a list of all people in the system",

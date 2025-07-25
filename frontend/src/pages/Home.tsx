@@ -1,36 +1,73 @@
 import React from "react";
-import ApiExample from "../components/ApiExample";
-import PeopleManager from "../components/PeopleManager";
+import { usePeople, Person } from "../hooks/usePeople";
 
-const Home: React.FC = () => {
+const Users: React.FC = () => {
+  const { data: users, isLoading, error } = usePeople();
+
+  console.log("users", users);
+
+  if (isLoading) {
+    return (
+      <div>
+        <h1>Users</h1>
+        <p>Loading users...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div>
+        <h1>Users</h1>
+        <p style={{ color: "red" }}>
+          Error loading users:{" "}
+          {error instanceof Error ? error.message : "Unknown error"}
+        </p>
+      </div>
+    );
+  }
+
   return (
     <div>
-      <h1>Welcome to React App</h1>
-      <p>
-        This is a React TypeScript application with React Query, React Router,
-        and generated API client.
-      </p>
+      <h1>Users</h1>
       <div style={{ marginTop: "2rem" }}>
-        <h2>Features:</h2>
-        <ul>
-          <li>TypeScript for type safety</li>
-          <li>React Router for single page navigation</li>
-          <li>TanStack Query (React Query) for data fetching</li>
-          <li>Generated API client from OpenAPI/Swagger spec</li>
-          <li>Modern React with functional components and hooks</li>
-        </ul>
-      </div>
-
-      <div style={{ marginTop: "2rem" }}>
-        <h2>Generated API Client Demo</h2>
-        <PeopleManager />
-      </div>
-
-      <div style={{ marginTop: "2rem" }}>
-        <ApiExample />
+        <h2>User List:</h2>
+        <div
+          style={{
+            display: "grid",
+            gap: "1rem",
+            gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+          }}
+        >
+          {users?.map((user: Person) => (
+            <div
+              key={user.id}
+              style={{
+                border: "1px solid #ddd",
+                borderRadius: "8px",
+                padding: "1rem",
+                backgroundColor: "#f9f9f9",
+              }}
+            >
+              <h3>{user.name}</h3>
+              <p>
+                <strong>Age:</strong> {user.age}
+              </p>
+              <p>
+                <strong>Email:</strong> {user.email}
+              </p>
+              <p>
+                <strong>City:</strong> {user.city}
+              </p>
+              <p>
+                <strong>Occupation:</strong> {user.occupation}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
 };
 
-export default Home;
+export default Users;

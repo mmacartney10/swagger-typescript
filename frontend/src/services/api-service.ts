@@ -1,5 +1,10 @@
-import { Api } from "../../../typescript-generator/generated/api-client";
+import { Api } from "../api/api-client";
 
 export const apiClient = new Api({
-  baseUrl: "http://localhost:3001",
+  baseUrl: "",
+  baseApiParams: {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  },
 });
