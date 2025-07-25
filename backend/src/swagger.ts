@@ -1,6 +1,6 @@
 import swaggerJSDoc from "swagger-jsdoc";
-import { getPeopleEndpoint } from "./getPeople/swagger";
-import { personSchema } from "./getPeople/types";
+import { getPeopleEndpoint } from "./people/swagger";
+import { personSchema } from "./people/types";
 
 const options: swaggerJSDoc.Options = {
   definition: {
@@ -26,7 +26,7 @@ const options: swaggerJSDoc.Options = {
     ],
     servers: [
       {
-        url: "http://localhost:3000",
+        url: "http://localhost:3001",
         description: "Development server",
       },
     ],

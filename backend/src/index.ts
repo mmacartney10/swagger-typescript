@@ -2,7 +2,7 @@ import { join } from "path";
 import { readFileSync } from "fs";
 import polka from "polka";
 import serveStatic from "serve-static";
-import getPeople from "./getPeople";
+import { getPeople, postPerson } from "./people";
 import { swaggerSpec } from "./swagger";
 
 const swaggerUiAssetPath = require("swagger-ui-dist").getAbsoluteFSPath();
@@ -39,6 +39,7 @@ polka()
     res.end(JSON.stringify(swaggerSpec, null, 2));
   })
   .get("/api/people", getPeople)
+  .post("/api/people", postPerson)
   .get("/api-docs", (req: any, res: any) => serveHtmlFile(res, "swagger"))
 
   // Legacy routes for backward compatibility

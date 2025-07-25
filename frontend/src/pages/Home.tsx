@@ -1,8 +1,9 @@
 import React from "react";
-import { usePeople, Person } from "../hooks/usePeople";
+import { useGetPeople, Person } from "../hooks/usePeople";
+import { AddPersonForm } from "../components/AddPersonForm";
 
 const Users: React.FC = () => {
-  const { data: users, isLoading, error } = usePeople();
+  const { data: users, isLoading, error } = useGetPeople();
 
   console.log("users", users);
 
@@ -65,6 +66,10 @@ const Users: React.FC = () => {
             </div>
           ))}
         </div>
+      </div>
+      <div style={{ marginTop: "2rem" }}>
+        <h2>Add New User:</h2>
+        <AddPersonForm />
       </div>
     </div>
   );
