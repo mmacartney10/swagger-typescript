@@ -35,6 +35,27 @@ A complete full-stack TypeScript application with React frontend, Node.js backen
 - **Swagger to TypeScript** client generator
 - **Type-safe** API calls
 - **Automatic** client generation from OpenAPI specs
+- **React Query integration** with generated client
+- **Full CRUD operations** with type safety
+
+## Generated API Client Integration
+
+The frontend now uses a **fully generated TypeScript API client** created from the backend's OpenAPI specification:
+
+### Key Integration Features:
+
+- **Type-safe API calls**: All API interactions use generated TypeScript types
+- **Custom React hooks**: `usePeople.ts` provides React Query integration
+- **Automatic client updates**: Regenerate client when API spec changes
+- **Full CRUD support**: Create, Read, Update, Delete operations ready
+- **Error handling**: Proper error types from generated client
+
+### Generated Files:
+
+- `frontend/src/api/api-client.ts` - Generated API client class
+- `frontend/src/api/api-types.ts` - Generated TypeScript type definitions
+- `frontend/src/hooks/usePeople.ts` - Custom React Query hooks
+- `frontend/src/components/PeopleManager.tsx` - Full CRUD demo component
 
 ## Quick Start
 

@@ -2,33 +2,32 @@ import { join } from "path";
 import { readFileSync } from "fs";
 import polka from "polka";
 import serveStatic from "serve-static";
-import swaggerUi from "swagger-ui-express";
 import getPeople from "./getPeople";
 import { swaggerSpec } from "./swagger";
 
 const swaggerUiAssetPath = require("swagger-ui-dist").getAbsoluteFSPath();
 
-const { PORT = "3001" } = process.env; // Changed to 3001 to avoid conflict with frontend dev server
+const { PORT = "3001" } = process.env;
 const port = parseInt(PORT, 10);
 
 const dir = join(__dirname, "../public");
 const serve = serveStatic(dir);
 
-// Serve the React build output
 const frontendBuildPath = join(__dirname, "../../frontend/build");
 const serveFrontend = serveStatic(frontendBuildPath);
 
 const serveHtmlFile = (res: any, htmlFileName: string) => {
   const htmlPath = join(__dirname, `../${htmlFileName}.html`);
   const html = readFileSync(htmlPath, "utf8");
+
   res.writeHead(200, { "Content-Type": "text/html" });
   res.end(html);
 };
 
-// Serve React app index.html for client-side routing
 const serveFrontendIndex = (req: any, res: any) => {
   const indexPath = join(frontendBuildPath, "index.html");
   const html = readFileSync(indexPath, "utf8");
+
   res.writeHead(200, { "Content-Type": "text/html" });
   res.end(html);
 };

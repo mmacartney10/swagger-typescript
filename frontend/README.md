@@ -1,18 +1,36 @@
 # React TypeScript Frontend
 
-A modern React application built with TypeScript, React Query, and React Router for single page navigation.
+A modern React application built with TypeScript, React Query, React Router, and **automatically generated API client** from OpenAPI/Swagger specifications.
 
 ## Features
 
 - **React 18** with TypeScript for type safety
 - **React Router** for client-side routing and single page navigation
 - **TanStack Query (React Query)** for server state management and data fetching
-- **Modern CSS** with responsive design
+- **Generated API Client** from OpenAPI/Swagger specs with full TypeScript support
 - **Custom hooks** for reusable data fetching logic
+- **Modern CSS** with responsive design
+
+## Generated API Client Integration
+
+This project demonstrates how to integrate a **generated TypeScript API client** with React Query for type-safe, efficient data fetching.
+
+### Key Files:
+
+- `src/api/` - Generated API client and TypeScript types
+- `src/hooks/usePeople.ts` - Custom React Query hooks using the generated client
+- `src/components/PeopleManager.tsx` - Full CRUD demo component
+- `src/pages/Users.tsx` - Simple list view using generated types
+
+### Generated API Client Features:
+
+1. **Type Safety**: Full TypeScript types generated from OpenAPI spec
+2. **Automatic Client Generation**: No manual API client coding needed
+3. **React Query Integration**: Seamless integration with React Query hooks
+4. **Error Handling**: Proper error types and handling
+5. **Request/Response Types**: Fully typed request parameters and responses
 
 ## Getting Started
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ### Prerequisites
 

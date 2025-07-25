@@ -1,13 +1,14 @@
 import React from "react";
 import ApiExample from "../components/ApiExample";
+import PeopleManager from "../components/PeopleManager";
 
 const Home: React.FC = () => {
   return (
     <div>
       <h1>Welcome to React App</h1>
       <p>
-        This is a React TypeScript application with React Query and React
-        Router.
+        This is a React TypeScript application with React Query, React Router,
+        and generated API client.
       </p>
       <div style={{ marginTop: "2rem" }}>
         <h2>Features:</h2>
@@ -15,8 +16,14 @@ const Home: React.FC = () => {
           <li>TypeScript for type safety</li>
           <li>React Router for single page navigation</li>
           <li>TanStack Query (React Query) for data fetching</li>
+          <li>Generated API client from OpenAPI/Swagger spec</li>
           <li>Modern React with functional components and hooks</li>
         </ul>
+      </div>
+
+      <div style={{ marginTop: "2rem" }}>
+        <h2>Generated API Client Demo</h2>
+        <PeopleManager />
       </div>
 
       <div style={{ marginTop: "2rem" }}>

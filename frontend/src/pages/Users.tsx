@@ -1,32 +1,8 @@
 import React from "react";
-import { useQuery } from "@tanstack/react-query";
-
-interface User {
-  id: number;
-  name: string;
-  email: string;
-  age: number;
-  city: string;
-  occupation: string;
-}
-
-const fetchUsers = async (): Promise<User[]> => {
-  const response = await fetch("/api/people");
-  if (!response.ok) {
-    throw new Error("Failed to fetch users");
-  }
-  return response.json();
-};
+import { usePeople, Person } from "../hooks/usePeople";
 
 const Users: React.FC = () => {
-  const {
-    data: users,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["users"],
-    queryFn: fetchUsers,
-  });
+  const { data: users, isLoading, error } = usePeople();
 
   if (isLoading) {
     return (
@@ -53,8 +29,8 @@ const Users: React.FC = () => {
     <div>
       <h1>Users</h1>
       <p>
-        This page demonstrates React Query for data fetching from our backend
-        API (/api/people).
+        This page demonstrates React Query with the generated API client from
+        typescript-generator (/api/people).
       </p>
 
       <div style={{ marginTop: "2rem" }}>
@@ -66,7 +42,7 @@ const Users: React.FC = () => {
             gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
           }}
         >
-          {users?.map((user) => (
+          {users?.map((user: Person) => (
             <div
               key={user.id}
               style={{
