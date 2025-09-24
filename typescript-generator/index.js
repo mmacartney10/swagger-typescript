@@ -3,7 +3,7 @@ import * as process from "node:process";
 import { generateApi } from "swagger-typescript-api";
 
 await generateApi({
-  input: path.resolve(process.cwd(), "./api-docs.json"),
+  // input: path.resolve(process.cwd(), "./api-docs.json"),
   output: path.resolve(process.cwd(), "./generated"),
   name: "api-client.ts",
   generateClient: true, // Generate the full API client class
@@ -18,4 +18,5 @@ await generateApi({
   silent: false, // Show progress
   disableThrowOnError: false, // Keep error throwing enabled
   unwrapResponseData: false, // Keep full response structure
+  url: "http://localhost:3001/swagger.json",
 });

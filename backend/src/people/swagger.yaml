@@ -1,0 +1,18 @@
+openapi: 3.0.0
+info:
+  title: People API
+  version: 1.0.0
+  description: API for managing people
+paths:
+  /api/people:
+    get:
+      summary: Get list of people
+      responses:
+        "200":
+          description: Successful response with people data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Person"
