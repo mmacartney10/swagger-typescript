@@ -1,6 +1,6 @@
 import { Person } from "../types";
 
-export const dummyPeople: Person[] = [
+export const peopleData: Person[] = [
   {
     name: "Richard Dickson",
     age: 30,

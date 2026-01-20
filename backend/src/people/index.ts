@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { dummyPeople } from "../data/people";
+import { peopleData } from "../data/people";
 import { Person } from "../types";
 
 const getPeople = (request: Request, response: Response): void => {
   console.log("getPeople");
-  response.status(200).json(dummyPeople);
+  response.status(200).json(peopleData);
 };
 
 const postPeople = (request: Request, response: Response): void => {
@@ -15,7 +15,7 @@ const postPeople = (request: Request, response: Response): void => {
       ...request.body,
     } as Person;
 
-    dummyPeople.push(newPerson);
+    peopleData.push(newPerson);
 
     response.status(201).json(newPerson);
   } catch (error) {

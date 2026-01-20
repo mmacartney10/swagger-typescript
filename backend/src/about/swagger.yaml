@@ -1,0 +1,23 @@
+openapi: 3.0.0
+info:
+  title: About API
+  version: 1.0.0
+  description: API for about information
+tags:
+  - name: AboutService
+    description: Operations related to application information
+paths:
+  /api/about:
+    get:
+      tags:
+        - AboutService
+      summary: Get about information
+      responses:
+        "200":
+          description: Successful response with about data
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/About"

@@ -7,7 +7,7 @@ export const useAddPeople = () => {
 
   return useMutation({
     mutationFn: async (newPerson: Person) => {
-      const response = await apiClient.api.peopleCreate(newPerson, {
+      const response = await apiClient.people.peopleCreate(newPerson, {
         format: "json",
       });
       return response.data;

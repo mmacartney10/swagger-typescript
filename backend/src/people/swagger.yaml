@@ -3,9 +3,14 @@ info:
   title: People API
   version: 1.0.0
   description: API for managing people
+tags:
+  - name: PeopleService
+    description: Operations related to managing people
 paths:
   /api/people:
     get:
+      tags:
+        - PeopleService
       summary: Get list of people
       responses:
         "200":
@@ -17,6 +22,8 @@ paths:
                 items:
                   $ref: "#/components/schemas/Person"
     post:
+      tags:
+        - PeopleService
       summary: Create a new person
       requestBody:
         required: true

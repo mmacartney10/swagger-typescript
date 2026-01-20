@@ -8,9 +8,19 @@ const loadSwaggerFile = (folder: string) => {
 };
 
 const peopleApi = loadSwaggerFile("people");
+const aboutApi = loadSwaggerFile("about");
 const otherApi = loadSwaggerFile("types");
 
-const mergedSpec: Record<string, any> = deepmerge(peopleApi, otherApi);
+const mergedSpec: Record<string, any> = deepmerge.all(
+  [peopleApi, aboutApi, otherApi],
+  {
+    arrayMerge: (destination, source) => [...destination, ...source],
+  },
+);
+
+if (!mergedSpec.tags) {
+  mergedSpec.tags = [];
+}
 
 export function setupSwagger(app: express.Application) {
   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(mergedSpec));

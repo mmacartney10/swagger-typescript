@@ -5,3 +5,11 @@ export interface Person {
   city: string;
   occupation: string;
 }
+
+export interface About {
+  companyName: string;
+  address: string;
+  phone: string;
+  email: string;
+  description: string;
+}
