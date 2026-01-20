@@ -14,4 +14,10 @@ const mergedSpec: Record<string, any> = deepmerge(peopleApi, otherApi);
 
 export function setupSwagger(app: express.Application) {
   app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(mergedSpec));
+
+  app.get("/swagger.json", (request, response) => {
+    response.json(mergedSpec);
+  });
 }
+
+export { mergedSpec };
