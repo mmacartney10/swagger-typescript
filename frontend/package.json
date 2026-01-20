@@ -7,11 +7,14 @@
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
     "typecheck": "react-router typegen && tsc",
-    "generate-typescript": "tsx generate-typescript.ts"
+    "generate-typescript": "tsx generate-typescript.ts",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "dependencies": {
     "@react-router/node": "7.12.0",
     "@react-router/serve": "7.12.0",
+    "@tanstack/react-query": "^5.90.19",
     "dotenv": "^17.2.3",
     "fs-extra": "^11.3.3",
     "isbot": "^5.1.31",
@@ -28,6 +31,7 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "openapi-typescript": "^7.8.0",
+    "prettier": "^3.8.0",
     "swagger-typescript-api": "^12.0.4",
     "tailwindcss": "^4.1.13",
     "typescript": "^5.9.2",

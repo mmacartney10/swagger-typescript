@@ -4,7 +4,6 @@ import { Person } from "../types";
 
 const getPeople = (request: Request, response: Response): void => {
   response.status(200).json(dummyPeople);
-  response.end(JSON.stringify(dummyPeople, null, 2));
 };
 
 const postPeople = (request: Request, response: Response): void => {

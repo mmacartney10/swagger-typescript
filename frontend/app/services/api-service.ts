@@ -1,7 +1,7 @@
-import { Api } from "../api/api-client";
+import { Api } from "../../generated/api-client";
 
 export const apiClient = new Api({
-  baseUrl: "",
+  baseUrl: "http://localhost:3001",
   baseApiParams: {
     headers: {
       "Content-Type": "application/json",
