@@ -1,6 +1,15 @@
+import "dotenv/config";
 import * as path from "node:path";
 import * as process from "node:process";
+import * as fs from "node:fs";
 import { generateApi } from "swagger-typescript-api";
+
+import openapiTS, { astToString } from "openapi-typescript";
+
+const ast = await openapiTS(new URL(process.env.SWAGGER_DOCS_URL as string));
+const contents = astToString(ast);
+
+fs.writeFileSync("./generated/api-types.ts", contents);
 
 await generateApi({
   output: path.resolve(process.cwd(), "./generated"),
@@ -12,11 +21,10 @@ await generateApi({
   extractResponseBody: true,
   extractEnums: true,
   addReadonly: false,
-  // sortRoutes: true,
   modular: false,
   silent: false,
-  // disableThrowOnError: false,
   unwrapResponseData: false,
   extractRequestParams: true,
-  url: "http://localhost:3001/swagger.json",
+  url: process.env.SWAGGER_DOCS_URL as string,
+  templates: undefined,
 });

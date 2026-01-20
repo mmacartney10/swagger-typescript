@@ -4,9 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "npm run generate-types && npm run generate-client",
-    "generate-types": "openapi-typescript http://localhost:3001/swagger.json -o ./generated/api-types.ts",
-    "generate-client": "tsx index.ts",
+    "build": "tsx index.ts",
     "test": "node -e \"import('./test-api-client.js').then(m => m.testApiClient())\""
   },
   "author": "",
@@ -19,6 +17,7 @@
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e",
   "dependencies": {
     "@types/node": "^25.0.9",
+    "dotenv": "^17.2.3",
     "tsx": "^4.21.0"
   }
 }
