@@ -3,17 +3,12 @@ components:
     Person:
       type: object
       required:
-        - id
         - name
         - age
         - email
         - city
         - occupation
       properties:
-        id:
-          type: integer
-          description: Unique identifier for the person
-          example: 1
         name:
           type: string
           description: Full name of the person

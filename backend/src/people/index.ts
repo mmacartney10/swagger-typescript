@@ -3,14 +3,16 @@ import { dummyPeople } from "../data/people";
 import { Person } from "../types";
 
 const getPeople = (request: Request, response: Response): void => {
+  console.log("getPeople");
   response.status(200).json(dummyPeople);
 };
 
 const postPeople = (request: Request, response: Response): void => {
+  console.log("postPeople", request.body);
+
   try {
     const newPerson: Person = {
       ...request.body,
-      id: dummyPeople.length + 1,
     } as Person;
 
     dummyPeople.push(newPerson);
