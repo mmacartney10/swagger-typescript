@@ -10,7 +10,6 @@ app.use(express.json());
 setupSwagger(app);
 
 app.get("/api/people", getPeople);
-
 app.post("/api/people", postPeople);
 
 app.listen(PORT, () => {

@@ -1,24 +1,24 @@
+import { Request, Response } from "express";
 import { dummyPeople } from "../data/people";
 import { Person } from "../types";
 
-const getPeople = (req: any, res: any): void => {
-  res.writeHead(200, { "Content-Type": "application/json" });
-  res.end(JSON.stringify(dummyPeople, null, 2));
+const getPeople = (request: Request, response: Response): void => {
+  response.status(200).json(dummyPeople);
+  response.end(JSON.stringify(dummyPeople, null, 2));
 };
 
-const postPeople = (req: any, res: any): void => {
+const postPeople = (request: Request, response: Response): void => {
   try {
-    const newPerson: Person = req.body;
-
-    // Generate a new ID
-    const newId = Math.max(...dummyPeople.map((p) => p.id)) + 1;
-    newPerson.id = newId;
+    const newPerson: Person = {
+      ...request.body,
+      id: dummyPeople.length + 1,
+    } as Person;
 
     dummyPeople.push(newPerson);
 
-    res.status(201).json(newPerson);
+    response.status(201).json(newPerson);
   } catch (error) {
-    res.status(400).json({ error: "Invalid person data" });
+    response.status(400).json({ error: "Invalid person data" });
   }
 };
 
