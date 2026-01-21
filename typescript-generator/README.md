@@ -1,122 +1,96 @@
-# Swagger to TypeScript Generator
+# TypeScript API Generator
 
-This project converts your Swagger/OpenAPI JSON specification into TypeScript types and a complete API client.
+A standalone TypeScript API client generator that converts Swagger/OpenAPI specifications into type-safe TypeScript code.
 
-## Generated Files
+## Overview
 
-- `./generated/api-types.ts` - Pure TypeScript type definitions (from openapi-typescript)
-- `./generated/api-client.ts` - Complete API client with all methods (from swagger-typescript-api)
+This tool generates two types of outputs from your Swagger/OpenAPI specification:
+
+- **Type definitions** using `openapi-typescript`
+- **Complete API client** using `swagger-typescript-api` with tag-based organization
+
+## Setup
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- A running API server with Swagger/OpenAPI documentation
+
+### Installation
+
+```bash
+npm install
+```
+
+### Configuration
+
+Create a `.env` file with your Swagger JSON endpoint:
+
+```env
+SWAGGER_DOCS_URL=http://localhost:3001/swagger.json
+```
 
 ## Usage
 
-### Option 1: Generate Types Only
-
-Run this to generate just the TypeScript types:
+### Generate API Client
 
 ```bash
-npm run generate-types
+npm run build
 ```
 
-### Option 2: Generate Complete API Client
+This will generate files in the `./generated` directory:
 
-Run this to generate a full API client with methods for all endpoints:
+- `api-client.ts`
+- `api-types.ts`
 
-```bash
-npm run generate-client
-```
-
-## Using the Generated API Client
-
-The generated API client includes methods for all your API endpoints. Here's how to use it:
+### Basic Usage
 
 ```typescript
-import { Api } from "./generated/api-client";
+import { People } from "./generated/People";
 
-// Create API client instance
-const apiClient = new Api({
-  baseUrl: "http://localhost:3000", // Your API base URL
-  // Add authentication if needed
-  securityWorker: (token) => ({
-    headers: { Authorization: `Bearer ${token}` },
-  }),
+const peopleApi = new People({
+  baseUrl: "http://localhost:3001",
+  baseApiParams: {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  },
 });
 
-// Use the generated methods - no need to write your own!
-const people = await apiClient.people.peopleList();
-console.log("Retrieved people:", people.data);
+// Use the API
+const people = await peopleApi.peopleList();
+const newPerson = await peopleApi.peopleCreate(personData);
 ```
 
-### Available API Methods
+### Organized by Tags
 
-The generated client includes methods for all your endpoints, such as:
+The generator uses `moduleNameFirstTag: true` to organize endpoints by their Swagger tags:
 
-- `apiClient.people.peopleList()` - Get all people from the system
+- **People tag** → `People.ts` with methods like `peopleList()`, `peopleCreate()`
+- **About tag** → `About.ts` with methods like `aboutGet()`
 
-Each method includes:
+### Type Definitions
 
-- ✅ Full TypeScript type safety
-- ✅ JSDoc documentation
-- ✅ Request/response type definitions
-- ✅ Error handling types
-- ✅ Automatic serialization/deserialization
-
-### Example Usage
+Import types from the contracts file:
 
 ```typescript
-import { getAllPeople } from "./api-client-usage";
-
-// Get all people with proper TypeScript types
-const people = await getAllPeople();
-
-// TypeScript knows the structure of Person objects
-people.forEach((person) => {
-  console.log(`${person.name} (${person.age}) works as ${person.occupation}`);
-  console.log(`Lives in ${person.city}, contact: ${person.email}`);
-});
+import type { Person, PeopleType } from "./generated/data-contracts";
 ```
-
-### Type-Only Usage (Alternative)
-
-If you prefer to write your own fetch logic, use the pure types:
-
-```typescript
-import type { paths, components } from "./generated/api-types";
-
-// Extract types for specific endpoints
-type WatchlistEndpoint =
-  paths["/api/1/customers/{customerId}/watchlists/{headerId}"];
-type UpdateOperation = WatchlistEndpoint["put"];
-type UpdateRequest = UpdateOperation["requestBody"];
-type UpdateResponse = UpdateOperation["responses"];
-```
-
-## Files
-
-- `api-docs.json` - Your Swagger/OpenAPI specification (currently a simple People API)
-- `package.json` - Project configuration with generation scripts
-- `index.js` - Configuration for swagger-typescript-api
-- `generated/api-client.ts` - Generated API client with methods
-- `generated/api-types.ts` - Generated TypeScript types
-- `api-client-usage.ts` - Example usage of the generated API client
-- `test-api-client.ts` - Test file to verify the API client works
 
 ## Development
 
-To regenerate after updating your Swagger specification:
+To regenerate after API changes:
 
 ```bash
-# Generate types only
-npm run generate-types
-
-# Generate full API client
-npm run generate-client
+npm run build
 ```
 
-## Benefits of the Generated API Client
+The generator will fetch the latest Swagger specification and regenerate all TypeScript files.
 
-✅ **No manual coding** - All API methods are generated automatically
-✅ **Type safety** - Full TypeScript support with IntelliSense
-✅ **Documentation** - JSDoc comments for all methods
-✅ **Error handling** - Proper error types for each endpoint
-✅ **Consistency** - All methods follow the same pattern
-✅ **Maintenance** - Re-generate when your API changes
+## Benefits
+
+✅ **Automatic Synchronization** - Stay in sync with API changes  
+✅ **Type Safety** - Catch API mismatches at compile time  
+✅ **Developer Experience** - IntelliSense and autocompletion  
+✅ **Maintainability** - No manual API client code to maintain  
+✅ **Consistency** - Standardized API calling patterns

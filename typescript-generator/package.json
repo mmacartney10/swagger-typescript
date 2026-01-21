@@ -4,8 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "build": "tsx index.ts",
-    "test": "node -e \"import('./test-api-client.js').then(m => m.testApiClient())\""
+    "build": "tsx index.ts"
   },
   "author": "",
   "license": "ISC",
