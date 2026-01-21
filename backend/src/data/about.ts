@@ -1,4 +1,4 @@
-import { About } from "../types";
+import { About, PeopleType } from "../types";
 
 export const aboutData: About = {
   companyName: "Tech Solutions Ltd.",
@@ -7,4 +7,5 @@ export const aboutData: About = {
   email: "info@techsolutions.com",
   description:
     "Tech Solutions Ltd. is a leading provider of innovative technology solutions, dedicated to helping businesses succeed in the digital age.",
+  type: PeopleType.MEDIUM,
 };

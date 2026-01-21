@@ -30,8 +30,23 @@ components:
           type: string
           description: Job title or occupation
           example: Software Developer
+    PeopleType:
+      type: string
+      enum:
+        - SMALL
+        - MEDIUM
+        - LARGE
+      description: Type of people organization size
+      example: MEDIUM
     About:
       type: object
+      required:
+        - companyName
+        - address
+        - phone
+        - email
+        - description
+        - type
       properties:
         companyName:
           type: string
@@ -49,3 +64,5 @@ components:
         description:
           type: string
           example: Tech Solutions Inc. is a leading provider of innovative technology solutions for businesses worldwide.
+        type:
+          $ref: "#/components/schemas/PeopleType"

@@ -1,8 +1,8 @@
 import express from "express";
 import cors from "cors";
 import { setupSwagger } from "./swagger";
-import { getPeople, postPeople } from "./people";
-import { getAbout } from "./about";
+import { getPeople, postPeople } from "./api/people";
+import { getAbout } from "./api/about";
 
 const app = express();
 const PORT = process.env.PORT || 3001;

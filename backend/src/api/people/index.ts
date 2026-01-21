@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
-import { peopleData } from "../data/people";
-import { Person } from "../types";
+import { peopleData } from "../../data/people";
+import { Person } from "../../types";
 
 const getPeople = (request: Request, response: Response): void => {
   console.log("getPeople");

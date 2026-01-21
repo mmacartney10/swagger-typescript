@@ -7,8 +7,8 @@ const loadSwaggerFile = (folder: string) => {
   return YAML.load(__dirname + `/${folder}/swagger.yaml`);
 };
 
-const peopleApi = loadSwaggerFile("people");
-const aboutApi = loadSwaggerFile("about");
+const peopleApi = loadSwaggerFile("api/people");
+const aboutApi = loadSwaggerFile("api/about");
 const otherApi = loadSwaggerFile("types");
 
 const mergedSpec: Record<string, any> = deepmerge.all(
