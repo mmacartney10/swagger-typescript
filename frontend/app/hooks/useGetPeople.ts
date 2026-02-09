@@ -6,7 +6,7 @@ export const useGetPeople = () => {
   return useQuery<PeopleListData>({
     queryKey: ["people"],
     queryFn: async () => {
-      const response = await apiClient.people.peopleList({ format: "json" });
+      const response = await apiClient.peopleService.peopleList({ format: "json" });
       return response.data;
     },
   });

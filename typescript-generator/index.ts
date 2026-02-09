@@ -5,7 +5,7 @@ import * as fse from "fs-extra";
 import { generateApi } from "swagger-typescript-api";
 import openapiTS, { astToString } from "openapi-typescript";
 
-const ast = await openapiTS(new URL(process.env.SWAGGER_DOCS_URL as string));
+const ast = await openapiTS(new URL("./swagger.json", import.meta.url));
 const contents = astToString(ast);
 
 await fse.outputFile("./generated/api-types.ts", contents);
@@ -16,7 +16,7 @@ await generateApi({
   extractRequestBody: true,
   extractRequestParams: true,
   extractResponseBody: true,
-  generateClient: true,
+  generateClient: false,
   generateRouteTypes: true,
   generateUnionEnums: false,
   httpClientType: "fetch",
@@ -25,5 +25,6 @@ await generateApi({
   output: path.resolve(process.cwd(), "./generated"),
   silent: true,
   unwrapResponseData: false,
-  url: process.env.SWAGGER_DOCS_URL as string,
+  // url: "./swagger.json",
+  input: path.resolve(process.cwd(), "./swagger.json"),
 });

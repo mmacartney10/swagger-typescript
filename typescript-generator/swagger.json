@@ -1,0 +1,509 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Task List Service",
+    "description": "This API provides provides a task list for new joiners to ii",
+    "contact": {
+      "name": "API & Services Team",
+      "email": "API&Services@ii.co.uk"
+    },
+    "license": {
+      "name": "Interactive Investor"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8635/tasklist-service",
+      "description": "Generated server url"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Task List",
+      "description": "APIs for retrieving the task list."
+    }
+  ],
+  "paths": {
+    "/api/1/customers/{customerId}/task-lists/new-joiner/status": {
+      "patch": {
+        "tags": [
+          "Task List"
+        ],
+        "summary": "update status",
+        "description": "Patch a new customer's task list status",
+        "operationId": "updateTasklistStatus_v1",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/CustomerId"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TasklistPatchViewModel"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "timestamp": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ServiceValidationError"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "ObjectErrors": {
+                    "description": "Object errors are validation failures caused by the whole entity or request and are not just dependent on individual fields.",
+                    "value": {
+                      "timestamp": "2026-02-06T15:41:17.521705",
+                      "status": 400,
+                      "error": "Bad Request",
+                      "errors": [
+                        {
+                          "code": "ObjectError1",
+                          "defaultMessage": "a plain English message"
+                        }
+                      ]
+                    }
+                  },
+                  "FieldErrors": {
+                    "description": "Field errors are validation failures caused by a particular field.",
+                    "value": {
+                      "timestamp": "2026-02-06T15:41:17.521941",
+                      "status": 400,
+                      "error": "Bad Request",
+                      "errors": [
+                        {
+                          "field": "myField",
+                          "codes": [
+                            "ErrorCode1.MyModel.myField",
+                            "ErrorCode1.myField",
+                            "ErrorCode1"
+                          ],
+                          "code": "ErrorCode1",
+                          "defaultMessage": "a plain English message"
+                        },
+                        {
+                          "field": "arrayField[0].myNestedField",
+                          "codes": [
+                            "ErrorCode2.MyModel.arrayField[0].myNestedField",
+                            "ErrorCode2.arrayField[0].myNestedField",
+                            "ErrorCode2"
+                          ],
+                          "code": "ErrorCode2",
+                          "defaultMessage": "a plain English message"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorised"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "bearer": [
+              "enrolled:base"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/1/customers/{customerId}/task-lists/new-joiner/notifications/{taskId}/viewed": {
+      "patch": {
+        "tags": [
+          "Task List"
+        ],
+        "summary": "mark notification as viewed",
+        "description": "Mark a sub task as viewed by its TASK_ID",
+        "operationId": "markNotificationAsViewed_v1",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/CustomerId"
+            }
+          },
+          {
+            "name": "taskId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Task identifier",
+              "enum": [
+                "FUND_YOUR_ACCOUNT",
+                "START_INVESTING",
+                "FEES_DDI",
+                "EXPRESSION_OF_WISHES",
+                "FUND_YOUR_ACCOUNT",
+                "START_INVESTING",
+                "FEES_DDI",
+                "EXPRESSION_OF_WISHES"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "timestamp": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "format": "int32"
+                    },
+                    "error": {
+                      "type": "string"
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ServiceValidationError"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "ObjectErrors": {
+                    "description": "Object errors are validation failures caused by the whole entity or request and are not just dependent on individual fields.",
+                    "value": {
+                      "timestamp": "2026-02-06T15:41:17.521705",
+                      "status": 400,
+                      "error": "Bad Request",
+                      "errors": [
+                        {
+                          "code": "ObjectError1",
+                          "defaultMessage": "a plain English message"
+                        }
+                      ]
+                    }
+                  },
+                  "FieldErrors": {
+                    "description": "Field errors are validation failures caused by a particular field.",
+                    "value": {
+                      "timestamp": "2026-02-06T15:41:17.521941",
+                      "status": 400,
+                      "error": "Bad Request",
+                      "errors": [
+                        {
+                          "field": "myField",
+                          "codes": [
+                            "ErrorCode1.MyModel.myField",
+                            "ErrorCode1.myField",
+                            "ErrorCode1"
+                          ],
+                          "code": "ErrorCode1",
+                          "defaultMessage": "a plain English message"
+                        },
+                        {
+                          "field": "arrayField[0].myNestedField",
+                          "codes": [
+                            "ErrorCode2.MyModel.arrayField[0].myNestedField",
+                            "ErrorCode2.arrayField[0].myNestedField",
+                            "ErrorCode2"
+                          ],
+                          "code": "ErrorCode2",
+                          "defaultMessage": "a plain English message"
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "401": {
+            "description": "Unauthorised"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "bearer": [
+              "enrolled:base"
+            ]
+          }
+        ]
+      }
+    },
+    "/api/2/customers/{customerId}/task-lists/new-joiner": {
+      "get": {
+        "tags": [
+          "Task List"
+        ],
+        "summary": "get tasks for a new customer",
+        "description": "Get a new customer's task list",
+        "operationId": "getTasklist_v2",
+        "parameters": [
+          {
+            "name": "customerId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/CustomerId"
+            }
+          },
+          {
+            "name": "channel",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "description": "Channel",
+              "enum": [
+                "WEB",
+                "MOBILE",
+                "WEB",
+                "MOBILE"
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/TaskListViewModel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorised"
+          },
+          "204": {
+            "description": "No Content (user never had a task list)"
+          },
+          "403": {
+            "description": "Forbidden"
+          }
+        },
+        "security": [
+          {
+            "bearer": [
+              "enrolled:base"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CustomerId": {
+        "type": "string"
+      },
+      "TasklistPatchViewModel": {
+        "type": "object",
+        "properties": {
+          "status": {
+            "type": "string",
+            "enum": [
+              "INACTIVE"
+            ]
+          }
+        }
+      },
+      "TaskListViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Task list identifier",
+            "enum": [
+              "TRADING_AND_ISA",
+              "SIPP",
+              "NOT_SET",
+              "TRADING_AND_ISA",
+              "SIPP",
+              "NOT_SET"
+            ]
+          },
+          "results": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/TaskViewModel"
+            }
+          },
+          "completed": {
+            "type": "boolean"
+          },
+          "status": {
+            "type": "string",
+            "description": "Task list status",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE",
+              "ACTIVE",
+              "INACTIVE"
+            ]
+          }
+        }
+      },
+      "TaskViewModel": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Task identifier",
+            "enum": [
+              "FUND_YOUR_ACCOUNT",
+              "START_INVESTING",
+              "FEES_DDI",
+              "EXPRESSION_OF_WISHES"
+            ]
+          },
+          "status": {
+            "type": "string",
+            "description": "Task status",
+            "enum": [
+              "TODO",
+              "COMPLETE",
+              "IN_PROGRESS",
+              "BLOCKED"
+            ]
+          },
+          "subTasks": {
+            "type": "array",
+            "description": "Subtask identifiers",
+            "items": {
+              "type": "string",
+              "description": "Subtask identifiers",
+              "enum": [
+                "TRANSFER_IN",
+                "ADD_CASH",
+                "REGULAR_INVESTMENTS",
+                "FIND_AND_INVEST",
+                "RESEARCH",
+                "FEES_DDI",
+                "EXPRESSION_OF_WISHES"
+              ]
+            },
+            "enum": [
+              "TRANSFER_IN",
+              "ADD_CASH",
+              "REGULAR_INVESTMENTS",
+              "FIND_AND_INVEST",
+              "RESEARCH",
+              "FEES_DDI",
+              "EXPRESSION_OF_WISHES"
+            ]
+          },
+          "displayNotification": {
+            "type": "boolean",
+            "description": "Whether to display a notification for this task"
+          }
+        }
+      },
+      "TaskType": {
+        "type": "string"
+      },
+      "ServiceValidationError": {
+        "type": "object",
+        "properties": {
+          "field": {
+            "type": "string"
+          },
+          "codes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "arguments": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          },
+          "code": {
+            "type": "string"
+          },
+          "defaultMessage": {
+            "type": "string"
+          }
+        }
+      },
+      "ServiceValidationErrors": {
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string"
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "error": {
+            "type": "string"
+          },
+          "errors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ServiceValidationError"
+            }
+          }
+        }
+      }
+    }
+  }
+}

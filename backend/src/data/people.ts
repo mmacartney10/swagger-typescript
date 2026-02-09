@@ -2,9 +2,9 @@ import { Person } from "../types";
 
 export const peopleData: Person[] = [
   {
-    name: "Richard Dickson",
+    name: "John Cheese",
     age: 30,
-    email: "richard.dickson@example.com",
+    email: "john.cheese@example.com",
     city: "Hull",
     occupation: "Chicken farmer",
   },
