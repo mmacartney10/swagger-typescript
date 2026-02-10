@@ -7,13 +7,11 @@ export const useAddPeople = () => {
 
   return useMutation({
     mutationFn: async (newPerson: Person) => {
-      const response = await apiClient.people.peopleCreate(newPerson, {
-        format: "json",
-      });
+      const response = await apiClient.peopleService.peopleCreate(newPerson);
       return response.data;
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["people"] });
+      queryClient.invalidateQueries({ queryKey: ["addPeople"] });
     },
   });
 };

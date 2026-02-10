@@ -18,4 +18,10 @@ export const useGetAbout = () => {
     description: "Leading provider of innovative tech solutions.",
   };
   return dummyAbout;
+
+  //   return useQuery<PeopleListData>({
+  //   queryKey: ["people"],
+  //   queryFn: async () => {
+  //   },
+  // });
 };

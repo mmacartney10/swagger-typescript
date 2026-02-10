@@ -4,9 +4,9 @@ import { apiClient } from "~/services/api-service";
 
 export const useGetPeople = () => {
   return useQuery<PeopleListData>({
-    queryKey: ["people"],
+    queryKey: ["getPeople"],
     queryFn: async () => {
-      const response = await apiClient.peopleService.peopleList({ format: "json" });
+      const response = await apiClient.peopleService.peopleList();
       return response.data;
     },
   });
