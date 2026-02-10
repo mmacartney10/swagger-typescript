@@ -24,6 +24,5 @@ await generateApi({
   name: "api-client.ts",
   output: path.resolve(process.cwd(), "./generated"),
   silent: true,
-  unwrapResponseData: false,
   url: process.env.SWAGGER_DOCS_URL as string,
 });

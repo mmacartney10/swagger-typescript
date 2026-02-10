@@ -8,12 +8,15 @@ const loadSwaggerFile = (folder: string) => {
 };
 
 const peopleApi = loadSwaggerFile("api/people");
-// const aboutApi = loadSwaggerFile("api/about");
+const aboutApi = loadSwaggerFile("api/about");
 const typesApi = loadSwaggerFile("types");
 
-const mergedSpec: Record<string, any> = deepmerge.all([peopleApi, typesApi], {
-  arrayMerge: (destination, source) => [...destination, ...source],
-});
+const mergedSpec: Record<string, any> = deepmerge.all(
+  [peopleApi, aboutApi, typesApi],
+  {
+    arrayMerge: (destination, source) => [...destination, ...source],
+  },
+);
 
 if (!mergedSpec.tags) {
   mergedSpec.tags = [];
